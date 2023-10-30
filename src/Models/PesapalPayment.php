@@ -2,6 +2,7 @@
 
 namespace CollinsLagat\LaravelPesapal\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,4 +26,14 @@ class PesapalPayment extends Model
         'currency',
         'error',
     ];
+
+    protected function originalMerchantReference(): Attribute
+    {
+        return Attribute::make(
+            get: function (string $merchantReference) {
+                $prefix = strtoupper(str_replace(" ", "", config('pesapal.reference_prefix')));
+                return (int)str_replace($prefix, '', $merchantReference);
+            },
+        );
+    }
 }
