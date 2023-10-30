@@ -1,0 +1,39 @@
+{
+  "name": "collins-lagat/laravel-pesapal",
+  "description": "A Laravel Package for Pesapal Payment Gateway (V3)",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Collins Lagat",
+      "email": "collins@collinslagat.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": "^8.0|^8.3",
+    "illuminate/support": "^7.0|^8.0|^9.0|^10.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10"
+  },
+  "autoload": {
+    "psr-4": {
+      "CollinsLagat\\LaravelPesapal\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "CollinsLagat\\LaravelPesapal\\PesapalServiceProvider"
+      ]
+    }
+  }
+}
