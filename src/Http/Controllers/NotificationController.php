@@ -4,6 +4,7 @@ namespace CollinsLagat\LaravelPesapal\Http\Controllers;
 
 use CollinsLagat\LaravelPesapal\Events\PesapalPaymentCompleted;
 use CollinsLagat\LaravelPesapal\Events\PesapalPaymentFailed;
+use CollinsLagat\LaravelPesapal\Http\Middleware\VerifyPesapalIPN;
 use CollinsLagat\LaravelPesapal\Models\PesapalPayment;
 use CollinsLagat\LaravelPesapal\Pesapal;
 use Illuminate\Http\Request;
@@ -11,6 +12,11 @@ use Illuminate\Routing\Controller;
 
 class NotificationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(VerifyPesapalIPN::class);
+    }
+
     public function handleNotification(Request $request, Pesapal $pesapal)
     {
         [
