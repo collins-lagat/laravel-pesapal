@@ -2,7 +2,7 @@
 
 namespace CollinsLagat\LaravelPesapal\Events;
 
-use CollinsLagat\LaravelPesapal\Models\PesapalCheckout;
+use CollinsLagat\LaravelPesapal\Models\PesapalPayment;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -14,7 +14,7 @@ class PesapalPaymentFailed
     /**
      * Create a new event instance.
      */
-    public function __construct(public PesapalCheckout $pesapalCheckout)
+    public function __construct(public PesapalPayment $payment)
     {
     }
 }

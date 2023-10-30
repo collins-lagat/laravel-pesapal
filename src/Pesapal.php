@@ -2,7 +2,7 @@
 
 namespace CollinsLagat\LaravelPesapal;
 
-use CollinsLagat\LaravelPesapal\Models\PesapalCheckout;
+use CollinsLagat\LaravelPesapal\Models\PesapalPayment;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
@@ -71,9 +71,9 @@ class Pesapal
             'merchant_reference' => $merchantReference,
         ] = $data;
 
-        PesapalCheckout::create([
+        PesapalPayment::create([
             'order_tracking_id' => $orderTrackingId,
-            'order_merchant_reference' => $merchantReference,
+            'merchant_reference' => $merchantReference,
         ]);
 
         return $data;
