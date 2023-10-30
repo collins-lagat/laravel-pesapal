@@ -55,7 +55,6 @@ class Pesapal
 
     public function makeOrderRequest($payload)
     {
-        // dd($payload);
         $url = "{$this->url}/api/Transactions/SubmitOrderRequest";
         $response =  Http::withToken($this->getToken())->post($url, $payload);
 
