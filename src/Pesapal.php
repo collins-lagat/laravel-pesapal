@@ -3,6 +3,7 @@
 namespace CollinsLagat\LaravelPesapal;
 
 use CollinsLagat\LaravelPesapal\Models\PesapalPayment;
+use CollinsLagat\LaravelPesapal\Support\OrderObject;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
@@ -53,9 +54,23 @@ class Pesapal
         return $token;
     }
 
-    public function makeOrderRequest($payload)
+    public function makeOrderRequest(OrderObject $order)
     {
         $url = "{$this->url}/api/Transactions/SubmitOrderRequest";
+
+        $payload = [
+            'id' => $order->id,
+            'currency' => $order->currency,
+            'amount' => $order->amount,
+            'description' => $order->description,
+            'callback_url' => $order->callback_url,
+            'notification_id' => $order->notification_id,
+            'billing_address' => [
+                'email_address' => $order->email_address,
+                'phone_number' => $order->phone_number,
+            ]
+        ];
+
         $response =  Http::withToken($this->getToken())->post($url, $payload);
 
         $data = $response->json();
