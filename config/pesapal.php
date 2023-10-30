@@ -76,5 +76,5 @@ return [
     |
     */
 
-    'reference_prefix' => env('PESAPAL_REFERENCE_PREFIX', 'S'),
+    'reference_prefix' => env('PESAPAL_REFERENCE_PREFIX'),
 ];
