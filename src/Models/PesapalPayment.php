@@ -14,7 +14,7 @@ class PesapalPayment extends Model
         'order_tracking_id',
         'merchant_reference',
         'payment_method',
-        'transaction_amount',
+        'amount',
         'confirmation_code',
         'payment_status_description',
         'description',
@@ -25,12 +25,16 @@ class PesapalPayment extends Model
         'payment_status_code',
         'currency',
         'error',
+        'created_date'
     ];
+
+    public $timestamps = false;
 
     protected function originalMerchantReference(): Attribute
     {
         return Attribute::make(
-            get: function (string $merchantReference) {
+            get: function () {
+                $merchantReference = $this->merchant_reference;
                 $prefix = strtoupper(str_replace(" ", "", config('pesapal.reference_prefix')));
                 return (int)str_replace($prefix, '', $merchantReference);
             },

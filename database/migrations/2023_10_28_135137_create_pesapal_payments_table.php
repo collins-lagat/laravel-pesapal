@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('order_tracking_id');
             $table->string('merchant_reference');
             $table->string('payment_method')->nullable();
-            $table->decimal('transaction_amount', 10, 2)->nullable();
+            $table->decimal('amount', 10, 2)->nullable();
             $table->string('confirmation_code')->nullable();
             $table->enum('payment_status_description', ['pending', 'failed', 'completed', 'invalid', 'reversed'])->default('pending');
             $table->string('description')->nullable();
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('payment_status_code')->nullable();
             $table->string('currency')->nullable();
             $table->json('error')->nullable();
-            $table->timestamps();
+            $table->dateTime('created_date')->nullable();
         });
     }
 

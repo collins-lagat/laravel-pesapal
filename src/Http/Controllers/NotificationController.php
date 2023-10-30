@@ -38,7 +38,8 @@ class NotificationController extends Controller
         $checkout = PesapalPayment::where('order_tracking_id', $orderTrackingId)->firstOrFail();
         $checkout->update([
             'payment_method' => $data['payment_method'],
-            'transaction_amount' => $data['transaction_amount'],
+            'amount' => $data['amount'],
+            'created_date' => $data['created_date'],
             'confirmation_code' => $data['confirmation_code'],
             'payment_status_description' => $data['payment_status_description'],
             'description' => $data['description'],
@@ -49,6 +50,7 @@ class NotificationController extends Controller
             'payment_status_code' => $data['payment_status_code'],
             'currency' => $data['currency'],
             'error' => $data['error'],
+            'created_date' => $data['created_date'],
         ]);
 
         if ($payment_status === 'completed') {
