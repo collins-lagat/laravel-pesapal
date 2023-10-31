@@ -16,7 +16,7 @@ class VerifyPesapalIPN
      */
     public function handle($request, Closure $next)
     {
-        if ($request->server('HTTP_HOST') !== 'pesapal.com') {
+        if ($request->host() !== 'pesapal.com') {
             return response()->json([
                 'status' => 500,
                 'message' => 'Invalid request',
