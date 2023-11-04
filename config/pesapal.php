@@ -47,16 +47,6 @@ return [
     'callback_url' => env('PESAPAL_CALLBACK_URL'),
 
     /*
-   |--------------------------------------------------------------------------
-   | Notification ID
-   |--------------------------------------------------------------------------
-   |
-   | This is the unique id that for the IPN (Instant Payment Notification)
-   |
-   */
-    'notification_id' => env('PESAPAL_NOTIFICATION_ID'),
-
-    /*
     |--------------------------------------------------------------------------
     | PESPAL Path
     |--------------------------------------------------------------------------
@@ -79,4 +69,18 @@ return [
     */
 
     'reference_prefix' => env('PESAPAL_REFERENCE_PREFIX'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | PESPAL IPN Destination Host
+    |--------------------------------------------------------------------------
+    |
+    | This is the host that Pesapal will send IPN notifications to.
+    | By default, this is the same as the application's URL, but you can
+    | change it to a different URL if you want to handle IPN notifications
+    | in a different application.
+    |
+    */
+
+    'ipn_destination_host' =>  env('PESAPAL_IPN_DESTINATION_HOST', env('APP_URL')),
 ];

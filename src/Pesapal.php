@@ -63,11 +63,11 @@ class Pesapal
             'currency' => $order->currency,
             'amount' => $order->amount,
             'description' => $order->description,
-            'callback_url' => $order->callback_url,
-            'notification_id' => $order->notification_id,
+            'callback_url' => $order->callbackUrl,
+            'notification_id' => $order->notificationId,
             'billing_address' => [
-                'email_address' => $order->email_address,
-                'phone_number' => $order->phone_number,
+                'email_address' => $order->emailAddress,
+                'phone_number' => $order->phoneNumber
             ]
         ];
 
@@ -108,5 +108,31 @@ class Pesapal
         }
 
         return $data;
+    }
+
+    public function registerIPNUrl()
+    {
+        $url = "{$this->url}/api/URLSetup/RegisterIPN";
+        $payload = [
+            'url' => config('pesapal.ipn_destination_host') . route('pesapal.ipn', absolute: false),
+            'ipn_notification_type' => 'POST',
+        ];
+
+        $response =  Http::withToken($this->getToken())->post($url, $payload);
+
+        $data =  $response->json();
+        ['status' => $status] = $data;
+
+        if ($status !== "200") {
+            throw new \Exception("IPN registration failed with status: {$data->status}");
+        }
+
+        return $data;
+    }
+
+    public function generateNotificationId()
+    {
+        ['ipn_id' => $ipn_id] = $this->registerIPNUrl();
+        return $ipn_id;
     }
 }
